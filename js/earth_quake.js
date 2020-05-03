@@ -63,8 +63,12 @@ function updatetable2(data){
 };
 
 
+var pane1 = myMap.createPane('markers1');
+var pane2 = myMap.createPane('markers2');
+
 button.on("click",function(event){
-//d3.selectAll("g").classed("oculto",true); 
+//d3.selectAll("path").classed("oculto",true);
+pane2.style.display = 'none';
 document.getElementById("divt1").style.visibility = "visible";
 document.getElementById("divt2").style.visibility = "hidden";
 document.getElementById("divt1").style.display="initial";
@@ -103,7 +107,8 @@ var place2 = place.split(":");
         colormag ="#409487";
         }
 
-   var circlemark =   {  opacity: 1,
+   var circlemark =   {pane: 'markers1',
+          opacity: 1,
           fillOpacity: .5,
           fillColor: "red",//colormag,
           color: "#000000",
@@ -122,7 +127,8 @@ L.circleMarker([latlng_2coma.substring(0, latlng_2coma.length - 1),latlng_2[4].s
 
 
 button2.on("click",function(event){
-//d3.selectAll("g").classed("oculto",true); 
+//d3.selectAll("g").classed("oculto",true);
+pane2.style.display = '';
 document.getElementById("divt1").style.display="none";
 document.getElementById("divt1").style.visibility = "hidden";
 document.getElementById("divt2").style.visibility = "visible";
@@ -153,7 +159,8 @@ for (var i = 0; i < mag.length; i++) {
         }
 
 
-   var circlemark =   {  opacity: 1,
+   var circlemark =   {pane: 'markers2',
+          opacity: 1,
           fillOpacity: .5,
           fillColor: colormag,
           color: "#000000",
@@ -162,6 +169,7 @@ for (var i = 0; i < mag.length; i++) {
           weight: 0.5
         }
 L.circleMarker(coor[i].slice(0,2).reverse(),circlemark).bindPopup("<h3>Magnitude: " +mag[i]  + "<h3><h3>Place: " +place[i]  + "</h3>").addTo(myMap);
+
 }
 
 });
