@@ -81,10 +81,10 @@ var magni = last_quake[3];
 var magni2 = magni.split(":"); 
 
 var place = last_quake[6];
-var place2 = place.split(":"); 
+var place2 = place.split(":");
 
-
-
+var profu = last_quake[7];
+var profu2 = profu.split(":"); 
 
  var colormag = "";
       switch (true) {
@@ -116,13 +116,28 @@ var place2 = place.split(":");
           stroke: true,
           weight: 0.5
         }
-
+console.log(latlng_2[3])
 var latlng_2coma= latlng_2[3].replace(",","");
 console.log(latlng_2coma.substring(0, latlng_2coma.length - 1))
-
-latlng_2[4].substring(0, latlng_2[4].length - 1)
+console.log(profu2[1].substring(0, profu2[1].length - 4))
+var profufinal =  profu2[1].substring(0, profu2[1].length - 4)
 
 L.circleMarker([latlng_2coma.substring(0, latlng_2coma.length - 1),latlng_2[4].substring(0, latlng_2[4].length - 1)],circlemark).bindPopup("<h3>Magnitude" +magni2[1] + "<h3><h3>Place: " +place2[1]  + "</h3>").addTo(myMap);
+
+const type = 'donut'
+const title = '# Depth #'
+
+var chart = c3.generate({
+    data: {
+        columns: [
+            ['DEPTH (KM)', profufinal],
+            ['-', 100 - profufinal]
+        ],
+        type
+    },
+    donut: { title }
+});
+
 });
 
 
