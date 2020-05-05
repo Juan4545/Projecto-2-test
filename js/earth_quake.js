@@ -63,12 +63,38 @@ function updatetable2(data){
 };
 
 
+
+function drawChart(magnitude) {
+  var data = google.visualization.arrayToDataTable([
+    ['Label', 'Value'],
+    ['Magnitude', magnitude],]);
+
+
+  var options = {
+    width: 700, height: 480,
+    redFrom: 6.0, redTo: 10,
+    yellowFrom:5.5, yellowTo: 6.0,
+    minorTicks: 10,
+    majorTicks: ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"],
+    max: 10,
+    min: 0,
+  };
+
+  var chart = new google.visualization.Gauge(document.getElementById('chart_div'));
+  chart.draw(data, options);
+}
+
+drawChart();
+
+
+
 var pane1 = myMap.createPane('markers1');
 var pane2 = myMap.createPane('markers2');
 
 button.on("click",function(event){
 //d3.selectAll("path").classed("oculto",true);
 pane2.style.display = 'none';
+d3.select("#chart_div").classed("oculto",false);
 document.getElementById("divt1").style.visibility = "visible";
 document.getElementById("divt2").style.visibility = "hidden";
 document.getElementById("divt1").style.display="initial";
@@ -81,10 +107,10 @@ var magni = last_quake[3];
 var magni2 = magni.split(":"); 
 
 var place = last_quake[6];
-var place2 = place.split(":");
+var place2 = place.split(":"); 
 
-var profu = last_quake[7];
-var profu2 = profu.split(":"); 
+
+
 
  var colormag = "";
       switch (true) {
@@ -116,33 +142,21 @@ var profu2 = profu.split(":");
           stroke: true,
           weight: 0.5
         }
-console.log(latlng_2[3])
+
 var latlng_2coma= latlng_2[3].replace(",","");
 console.log(latlng_2coma.substring(0, latlng_2coma.length - 1))
-console.log(profu2[1].substring(0, profu2[1].length - 4))
-var profufinal =  profu2[1].substring(0, profu2[1].length - 4)
+
+latlng_2[4].substring(0, latlng_2[4].length - 1)
 
 L.circleMarker([latlng_2coma.substring(0, latlng_2coma.length - 1),latlng_2[4].substring(0, latlng_2[4].length - 1)],circlemark).bindPopup("<h3>Magnitude" +magni2[1] + "<h3><h3>Place: " +place2[1]  + "</h3>").addTo(myMap);
 
-const type = 'donut'
-const title = '# Depth #'
-
-var chart = c3.generate({
-    data: {
-        columns: [
-            ['DEPTH (KM)', profufinal],
-            ['-', 100 - profufinal]
-        ],
-        type
-    },
-    donut: { title }
-});
-
+drawChart(parseInt(magni2[1]));
 });
 
 
 button2.on("click",function(event){
 //d3.selectAll("g").classed("oculto",true);
+d3.select("#chart_div").classed("oculto",true);
 pane2.style.display = '';
 document.getElementById("divt1").style.display="none";
 document.getElementById("divt1").style.visibility = "hidden";

@@ -15,13 +15,11 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 <script src="https://d3js.org/d3.v4.min.js"></script>
-
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
 <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
 <script src="https://api.mapbox.com/mapbox-gl-js/v1.10.0/mapbox-gl.js"></script>
 <link href="https://api.mapbox.com/mapbox-gl-js/v1.10.0/mapbox-gl.css" rel="stylesheet" />
-<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/d3/3.4.11/d3.js"></script>
-<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.js"></script>
 <style>
     body { margin: 0; padding: 0; }
     #map { position: absolute; 
@@ -33,6 +31,10 @@
 </style>
 
 <script type="text/javascript" src="js/choropleth.js"></script>
+
+<script type="text/javascript">
+      google.charts.load('current', {'packages':['gauge']});
+      </script>
 </head>
 <body>
     <nav class="navbar navbar-dark bg-dark">
@@ -50,7 +52,7 @@
               <div class="col">
             </div>
             <div class="col-7">
-                <div id="map" ></div>
+                <div id="map"></div>
             </div>
         </div>
 
@@ -78,7 +80,11 @@
                 </div> 
             </div>
         </div>
-        <div id="chart"></div>
+
+        <div class="row">
+          <div id="chart_div" style="width: 400px; height: 120px;"></div>
+
+        </div>
     </div>
 
  <script type="text/javascript" src="js/earth_quake.js"></script>
